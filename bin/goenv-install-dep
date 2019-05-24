@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+#
+# Summary: Install dep
+#
+# Usage: goenv install-dep
+#
+# Install dep to current go version
+#
+set -e
+[ -n "$GOENV_DEBUG" ] && set -x
+
+if [ -z "$GOENV_ROOT" ]; then
+    GOENV_ROOT="${HOME}/.goenv"
+fi
+
+function parse_options ()
+{
+    OPTIONS=();
+    ARGUMENTS=();
+    local arg option index;
+    for arg in "$@";
+    do
+        if [ "${arg:0:1}" = "-" ]; then
+            if [ "${arg:1:1}" = "-" ]; then
+                OPTIONS[${#OPTIONS[*]}]="${arg:2}";
+            else
+                index=1;
+                while option="${arg:$index:1}"; do
+                    [ -n "$option" ] || break;
+                    OPTIONS[${#OPTIONS[*]}]="$option";
+                    index=$(($index+1));
+                done;
+            fi;
+        else
+            ARGUMENTS[${#ARGUMENTS[*]}]="$arg";
+        fi;
+    done
+};
+
+usage() {
+  # We can remove the sed fallback once goenv 0.4.0 is widely available.
+  goenv-help install-dep 2>/dev/null || sed -ne '/^#/!q;s/.//;s/.//;1,4d;p' < "$0"
+  [ -z "$1" ] || exit "$1"
+}
+
+unset VERBOSE
+
+parse_options "$@"
+for option in "${OPTIONS[@]}"; do
+  case "$option" in
+  "h" | "help" )
+    usage 0
+    ;;
+  * )
+    usage 1
+    ;;
+  esac
+done
+
+export GOPATH=$(goenv prefix)
+export GOBIN="$GOPATH/bin"
+curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+goenv rehash
