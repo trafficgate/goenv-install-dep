@@ -1,0 +1,13 @@
+language: go
+
+before_script:
+  - mkdir -p ~/.goenv/plugins/
+  - ln -sfn "$PWD" ~/.goenv/plugins/goenv-install-glide
+  - goenv rehash
+
+script:
+  - goenv install-dep
+  - [ "$(which dep)" == "${HOME}/.goenv/shims/dep" ]
+  - [ "$(goenv which dep)" == "$(goenv prefix)/bin/dep" ]
+  - dep --version
+  - ls -l "$(goenv prefix)/bin/dep"
