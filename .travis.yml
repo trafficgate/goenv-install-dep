@@ -3,7 +3,8 @@ language: c
 dist: xenial
 
 before_script:
-  - git clone https://github.com/syndbg/goenv.git ~/.goenv
+  - git clone https://github.com/syndbg/goenv.git ${HOME}/.goenv
+  - PATH=${HOME}/.goenv/bin:${PATH}
   - eval "$(goenv init -)"
   - goenv install 1.12.5
   - goenv global 1.12.5
