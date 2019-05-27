@@ -1,5 +1,7 @@
 # goenv install-dep plugin
 
+[![Build Status](https://travis-ci.org/trafficgate/goenv-install-dep.svg?branch=master)](https://travis-ci.org/trafficgate/goenv-install-dep)
+
 ## Install
 
 ```shell
