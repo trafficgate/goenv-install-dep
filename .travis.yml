@@ -9,7 +9,7 @@ before_script:
   - goenv install 1.12.5
   - goenv global 1.12.5
   - mkdir -p ~/.goenv/plugins/
-  - ln -sfn "$PWD" ~/.goenv/plugins/goenv-install-glide
+  - ln -nfs "$PWD" ~/.goenv/plugins/goenv-install-dep
   - goenv rehash
 
 script:
