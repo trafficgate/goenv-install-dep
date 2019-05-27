@@ -1,6 +1,12 @@
-language: go
+language: c
+
+dist: xenial
 
 before_script:
+  - git clone https://github.com/syndbg/goenv.git ~/.goenv
+  - eval "$(goenv init -)"
+  - goenv install 1.12.5
+  - goenv global 1.12.5
   - mkdir -p ~/.goenv/plugins/
   - ln -sfn "$PWD" ~/.goenv/plugins/goenv-install-glide
   - goenv rehash
