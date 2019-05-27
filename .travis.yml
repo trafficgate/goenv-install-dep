@@ -16,5 +16,5 @@ script:
   - goenv install-dep
   - '[ "$(which dep)" == "${HOME}/.goenv/shims/dep" ]'
   - '[ "$(goenv which dep)" == "$(goenv prefix)/bin/dep" ]'
-  - dep --version
+  - dep version
   - ls -l "$(goenv prefix)/bin/dep"
